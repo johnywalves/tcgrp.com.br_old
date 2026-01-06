@@ -1,0 +1,7 @@
+---
+layout: event
+date: 2026-01-24 14:30:00 -0300
+store: Forja Hobby Store
+categories:
+  - gundam
+---

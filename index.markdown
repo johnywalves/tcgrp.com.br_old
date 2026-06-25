@@ -21,5 +21,8 @@ layout: home
 {% assign events = site.posts | where: "layout", "event" %}
 {% include next_events.html %}
 
+
+
+
 {% assign stores = site.posts | where: "layout", "store" %}
 {% include list_stores.html %}

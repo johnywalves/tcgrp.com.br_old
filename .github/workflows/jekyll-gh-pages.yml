@@ -30,7 +30,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: false # Mantido false para permitir o controle manual abaixo
+          bundler-cache: false # Mantido false para permitir a reconfiguração manual abaixo
 
       - name: Setup Pages
         id: pages
@@ -38,16 +38,13 @@ jobs:
 
       - name: Install and Update Dependencies
         run: |
-          # 1. Desativa explicitamente o modo congelado que está travando o build
+          # 1. Desativa o modo congelado que impede atualizações de dependências na nuvem
           bundle config set --local frozen false
           
-          # 2. Garante suporte à plataforma Linux do runner
-          bundle platform --add x86_64-linux
-          
-          # 3. Atualiza o lockfile para aceitar o Jekyll 4 do seu Gemfile
+          # 2. Sincroniza e resolve os conflitos de versão do Jekyll 4 vs lockfile antigo
           bundle update jekyll
           
-          # 4. Instala todas as gems de forma limpa
+          # 3. Instala as gems de forma limpa no runner
           bundle install
 
       - name: Build with Jekyll

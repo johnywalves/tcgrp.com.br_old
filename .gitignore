@@ -5,3 +5,4 @@ _site
 vendor
 *:Zone.Identifier
 node_modules
+.bundle/config

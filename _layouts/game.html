@@ -27,7 +27,7 @@
 {% assign stores = posts | where: 'layout', 'store' %}
 
 <body>
-  <img class="background" src="/backgrounds/{{ page.background }}.webp" alt="">
+  <img class="background" src="{{ site.url | append: '/backgrounds/{{ page.background }}.webp' }}" alt="">
 
   {% include header.html %}
 

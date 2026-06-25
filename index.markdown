@@ -10,11 +10,11 @@ layout: home
 <div class="group games">
   <h2>Trading Card Game</h2>
   <a href="/digimon" aria-label="ir para digimon">
-    <img src="/logos/digimon.svg" width="450" alt="digimon logo" />
+    <img src="{{ site.url | append: '/logos/digimon.svg' }}" width="450" alt="digimon logo" />
   </a>
 
   <a href="/gundam" aria-label="ir para digimon">
-    <img src="/logos/gundam.png" width="250" alt="gundam logo"/>
+    <img src="{{ site.url | append: '/logos/gundam.png' }}" width="250" alt="gundam logo"/>
   </a>
 </div>
 

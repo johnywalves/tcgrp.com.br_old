@@ -27,7 +27,7 @@
 </style>
 
 <body>
-  <img class="background" src="/backgrounds/{{ category }}.webp" alt="">
+  <img class="background" src="{{ site.url | append: '/backgrounds/{{ category }}.webp' }}" alt="">
 
   {% include header.html %}
 
@@ -36,7 +36,7 @@
       <div class="store">
         <a href="/{{ category }}">
           <picture class="logo">
-            <img src="/logos/{{ game.logo }}" alt="logo {{ c }}">
+            <img src="{{ site.url | append: '/logos/{{ game.logo }}' }}" alt="logo {{ c }}">
           </picture>
         </a>
 

@@ -27,16 +27,16 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2' # Versão recomendada para compatibilidade com seu ambiente
-          bundler-cache: true # Faz o cache automático das suas gems para o build ser ultra rápido
+          ruby-version: '3.2' # Versão estável do Ruby para o Jekyll 4
+          bundler-cache: true # Cache automático para builds rápidos
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
 
       - name: Build with Jekyll
-        # Compila o site usando o seu Gemfile local (Jekyll 4) em vez do Jekyll 3 legado da nuvem
-        run: bundle exec jekyll build --baseurl "${{ steps: .pages.outputs.base_path }}"
+        # Corrigido: Removido o espaço e os pontos duplicados na variável de contexto do steps
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
 

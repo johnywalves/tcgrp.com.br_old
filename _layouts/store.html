@@ -32,7 +32,7 @@
     {% assign background_image = page.background %}
   {% endif %}
 
-  <img class="background" src="{{ site.url | append: '/backgrounds/{{ background_image }}'}}" alt="">
+  <img class="background" src="{{ site.url | append: '/backgrounds/' | append: background_image }}" alt="">
 
   {% include header.html %}
 

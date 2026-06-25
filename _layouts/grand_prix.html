@@ -114,7 +114,7 @@
 </style>
 
 <body>
-  <img class="background" src="{{ site.url | append: '/backgrounds/{{ page.game }}.webp' }}" alt="">
+  <img class="background" src="{{ site.url | append: '/backgrounds/' | append: page.game | append: '.webp' }}" alt="">
 
   {% include header.html %}
 

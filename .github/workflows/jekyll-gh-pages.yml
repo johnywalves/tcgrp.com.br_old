@@ -21,7 +21,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Instala dependências nativas necessárias para compilar pacotes C de algumas gems do Jekyll
       - name: Install system dependencies
         run: |
           sudo apt-get update
@@ -31,11 +30,25 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: true # Fará o cache automático após a primeira compilação bem-sucedida
+          bundler-cache: false # Mantido false para permitir o controle manual abaixo
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+
+      - name: Install and Update Dependencies
+        run: |
+          # 1. Desativa explicitamente o modo congelado que está travando o build
+          bundle config set --local frozen false
+          
+          # 2. Garante suporte à plataforma Linux do runner
+          bundle platform --add x86_64-linux
+          
+          # 3. Atualiza o lockfile para aceitar o Jekyll 4 do seu Gemfile
+          bundle update jekyll
+          
+          # 4. Instala todas as gems de forma limpa
+          bundle install
 
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"

@@ -5,37 +5,39 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
-# Define as permissões necessárias para o token do GitHub Actions interagir com o GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Garante que builds simultâneos não se atropelem
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Job de Build
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Instala dependências nativas necessárias para compilar pacotes C de algumas gems do Jekyll
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libvips zlib1g-dev
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2' # Versão estável do Ruby para o Jekyll 4
-          bundler-cache: true # Cache automático para builds rápidos
+          ruby-version: '3.2'
+          bundler-cache: true # Fará o cache automático após a primeira compilação bem-sucedida
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
 
       - name: Build with Jekyll
-        # Corrigido: Removido o espaço e os pontos duplicados na variável de contexto do steps
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
@@ -43,7 +45,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
-  # Job de Deploy
   deploy:
     environment:
       name: github-pages
